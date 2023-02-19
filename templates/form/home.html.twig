@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+{% endblock %}
+
+{% block body %}
+	<nav class="navbar navbar-expand-lg fixed-top navbar-light shadow">
+		<div class="container">
+			<a class="navbar-brand" href="">
+				{% if msg is defined %}
+					<span id="welcomeMsg">{{msg}}</span>
+				{% endif %}
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div
+				class="collapse navbar-collapse " id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link " id="logoutBtn" onclick="deleteLocalStorage()" href="/logout">Logout
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	{% if viewMode is defined %}
+		<div class="container largeBox">
+			<div class="container">
+				<div class="form">
+					<form id="userDetails" action="/save" method="GET" enctype="multipart/form-data">
+						<label>Full Name</label>
+						<div class="form-group mr-auto ml-auto   row">
+							<input class="form-control col-sm-6 " value={% if firstname is defined %} {{firstname}} {% endif %} readonly/>
+
+							<input class="form-control col-sm-6 email" value={% if lastname is defined %} {{lastname}} {% endif %} readonly/>
+						</div>
+
+						<label for="ex1">Select an Image</label>
+						<div
+							class="form-group">
+							<img src="{{image}}" width="400px" height="300px" alt="image">
+						</div>
+
+						<label for="ex1">Marks</label>
+						<div class="container">
+							<div class="subject row mb-2">
+								<textarea class="col-lg-6 form-control marksArea" rows="10" readonly>{{subjects}},{{marks}}</textarea>
+							</div>
+						</div>
+						<label>Contact</label>
+						<div class="form-group mr-auto ml-auto   row">
+							<input class="form-control col-sm-6 phone" value={% if phone is defined %} {{phone}} {% endif %} readonly/>
+							<input class="form-control col-sm-6 email" value={% if email is defined %} {{email}} {% endif %} type="email" placeholder="Email" name="email" id="email" readonly/>
+						</div>
+						<div id="loader" class="center"></div>
+						{% if errorMsg is defined %}
+							<span id="msg">{{errorMsg}}</span>
+						{% endif %}
+						<div class="buttons">
+							<button class="btn btn-default bg-primary mt-2" onclick="window.location.href='/home?edit=0';">Edit</button>
+							<button class="btn btn-default bg-primary mt-2" onclick="window.location.href='/download';">Download</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	{% else %}
+
+		<div class="container largeBox">
+			<div class="container">
+				<div class="form">
+					<form id="userDetails" action="/save" method="POST" enctype="multipart/form-data">
+						<label>Full Name</label>
+						<div class="form-group mr-auto ml-auto   row">
+							<input class="form-control col-sm-6 firstname" onkeyup='saveValue(this);' type="text" placeholder="First name" name="firstname" id="firstname" required/>
+
+							<input class="form-control col-sm-6 lastname" onkeyup='saveValue(this);' type="text" placeholder="Last name" name="lastname" id="lastname" required/>
+						</div>
+						<label for="ex1">Select an Image</label>
+						<div class="form-group">
+							<input class="form-control mt-2 mb-2 image" accept="image/*" id="image" type="file" name="image" required/>
+						</div>
+						<label for="ex1">Marks</label>
+						<div class="container">
+							<div class="subject row mb-2">
+								<textarea class="col-lg-6 form-control marksArea" onkeyup='saveValue(this);' placeholder="Math|80" maxlength="80" minlength="3" id="largeTextArea" name="subTextArea" rows="10" required></textarea>
+							</div>
+						</div>
+						<label>Contact</label>
+						<div class="form-group mr-auto ml-auto   row">
+							<input class="form-control col-sm-6 pnNum" onkeyup='saveValue(this);' maxlength="10" type="number" placeholder="Phone number" name="phone" id="phone"/>
+							<input class="form-control col-sm-6 email" value={% if email is defined %} {{email}} {% endif %} type="email" placeholder="Email" name="email" id="email" readonly/>
+						</div>
+						<div id="loader" class="center"></div>
+						<div class="buttons">
+							<button type="submit" class="btn btn-default bg-primary mt-2" value="Submit" id="submitBtn" style="text-decoration: none;">Submit</button>
+							<button class="btn btn-default bg-primary mt-2" onclick="window.location.href='/home?edit=1';">View</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		{# break point #}
+	{% endif %}
+
+	<footer class="page-footer font-small fixed-bottom blue">
+		<div class="footer-copyright text-center py-3" id="footerBtn">© 2023 Copyright:
+			<a href="/" id="footerBtn">
+				www.india.gov.in</a>
+		</div>
+	</footer>
+
+{% endblock %}
