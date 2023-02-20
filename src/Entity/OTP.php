@@ -11,16 +11,16 @@ class OTP
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = NULL;
 
     #[ORM\Column(length: 255)]
-    private ?string $userName = null;
+    private ?string $userName = NULL;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private ?\DateTimeImmutable $created_at = NULL;
 
     #[ORM\Column]
-    private ?int $value = null;
+    private ?int $value = NULL;
     
     /**
      *  getId is the auto generated primary key in database

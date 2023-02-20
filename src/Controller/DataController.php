@@ -109,7 +109,7 @@ class DataController extends AbstractController
     $msg = "Email_not_verified";
 
     // get the mail from the user
-    if ($userRow != null) {
+    if ($userRow != NULL) {
       $msg = $userRow->getEmail();
     }
 
@@ -117,7 +117,7 @@ class DataController extends AbstractController
     $stringVersionofSubjects = "";
 
     // Extracting marks and subjects from 
-    if ($userRowDetails != null) {
+    if ($userRowDetails != NULL) {
       $stringVersionofMarks    = implode(',', $userRowDetails->getMarks());
       $stringVersionofSubjects = implode(',', $userRowDetails->getSubjects());
     }
@@ -126,10 +126,10 @@ class DataController extends AbstractController
 
     // If edit value is 1, view mode will be shown.
     if ($edit == 1) {
-      if ($userRowDetails != null) {
+      if ($userRowDetails != NULL) {
         return $this->render(
           'form/home.html.twig',
-          array(
+          [
             "msg"       => "Welcome $userName",
             "firstname" => $userRowDetails->getFirstName(),
             "lastname"  => $userRowDetails->getLastName(),
@@ -139,18 +139,18 @@ class DataController extends AbstractController
             "phone"     => $userRowDetails->getPhoneNumber(),
             "email"     => $msg,
             "viewMode"  => TRUE
-          )
+          ]
         );
       }
     }
     // It shows the edit mode of the input.
     return $this->render(
       'form/home.html.twig',
-      array(
+      [
         "msg"      => "Welcome $userName",
         "errorMsg" => $error,
         "email"    => $msg,
-      )
+      ]
     );
   }
 

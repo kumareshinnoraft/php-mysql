@@ -60,14 +60,14 @@ class PDF
     $this->pdf->AddPage();
 
     // Set a font
-    $this->pdf->SetFont('Arial', 'B', 16);
-    $imagePath = FormController::IMAGE_PATH . $userName . ".jpg";
+    $this->pdf->SetFont('Arial', 'B', 16);  
+    $imagePath = "http://" . $_SERVER["SERVER_NAME"] . FormController::IMAGE_PATH . $userName . ".jpg";
 
     // Setting the image
     $this->pdf->Image($imagePath, 10, 10, 100, 50, "", "");
 
     // Setting the full name
-    $this->pdf->Text(10, 70, "Hey, I'm $firstName $lastName");
+    $this->pdf->Text(10, 70, "Hey, I'm $firstName" . $lastName);
     $this->pdf->Text(10, 80, "My marks -- ");
 
     // Creating space from top

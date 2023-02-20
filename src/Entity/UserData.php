@@ -11,16 +11,16 @@ class UserData
   #[ORM\Id]
   #[ORM\GeneratedValue]
   #[ORM\Column]
-  private ?int $id = null;
+  private ?int $id = NULL;
 
   #[ORM\Column(length: 255)]
-  private ?string $userName = null;
+  private ?string $userName = NULL;
 
   #[ORM\Column(length: 255)]
-  private ?string $email = null;
+  private ?string $email = NULL;
 
   #[ORM\Column(length: 255)]
-  private ?string $password = null;
+  private ?string $password = NULL;
 
   /**
    *  getId is the auto generated primary key in database

@@ -39,8 +39,6 @@ class Cookie
    *  @var object
    */
   private $request;
-
-
   /**
    *  Constructor is used to initilize the objects
    *
@@ -50,7 +48,7 @@ class Cookie
   {
 
     $this->cryptography = new Cryptography();
-    $this->request      = new Request;
+    $this->request      = new Request();
 
   }
   /**
@@ -60,7 +58,7 @@ class Cookie
    *    Array value contain three parameeter, user, email and username.
    * 
    *  @return void
-   */
+   */    
   public function setCookie(array $value)
   {
     // Serilizing the values.
@@ -76,9 +74,9 @@ class Cookie
   /**
    *  getCookie function is used to extract the value and returns the value.
    *
-   *  @param  mixed $name
+   *  @param  string $name
    *    $name parameter is the key of the value user is requesting for.
-   *  @param  mixed $request
+   *  @param  object $request
    *    an request object understands in which page value is required.
    * 
    *  @return mixed
@@ -104,7 +102,7 @@ class Cookie
   /**
    *  isActive function returns if user active or not
    *
-   *  @param  mixed $request
+   *  @param  object $request
    *    request object is taken from the user to indentify which
    *    page is requesting isActive method.
    * 
@@ -130,7 +128,7 @@ class Cookie
   /**
    *  removeCookie function is used to remove user data from cookie.
    *
-   *  @param  mixed $request
+   *  @param  object $request
    *    request is needed to get the cookies of the pages.
    * 
    *  @return void

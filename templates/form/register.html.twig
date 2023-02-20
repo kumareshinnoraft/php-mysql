@@ -18,20 +18,20 @@
 						<div class="mb-3 title">
 							Verify OTP
 						</div>
-						<form action="/confirmaccount" id="otp" method="POST" class="mb-3">
+						<form action="/confirmaccount" id="userDetails" method="POST" class="mb-3">
 							<input class="otp" name="1" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength="1">
 							<input class="otp" name="2" type="text" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength="1">
 							<input class="otp" name="3" type="text" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength="1">
 							<input class="otp" name="4" type="text" oninput='digitValidate(this)' onkeyup='tabChange(4)' maxlength="1">
 						</form>
-						<button type="submit" form="otp" value="Submit"class='btn btn-primary btn-block mb-4 customBtn'>Verify</button>
-            <a href="/resendotp">Send again</a>
+						<button type="submit" value="Submit" form="userDetails" class='btn btn-primary btn-block mb-4 customBtn'>Verify</button>
+						<a href="/resendotp">Send again</a>
 					</div>
 
 				{% else %}
 					{# Break point #}
 					<div class="d-flex justify-content-center form_container">
-						<form id="frm" action="/register" method="POST">
+						<form id="userDetails" action="/register" method="POST">
 							<div class="input-group mb-3">
 								<div class="input-group-append">
 									<span class="input-group-text">
@@ -77,4 +77,6 @@
 			</div>
 		</div>
 	</div>
-</div>{% endblock %}
+</div>
+
+{% endblock %}

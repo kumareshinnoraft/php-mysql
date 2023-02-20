@@ -25,13 +25,13 @@ class ValidateForm
    *
    *  @var array
    */
-  public $subjects = array();
+  public $subjects = [];
   /**
    *  marks array will store all extracted marks.
    *
    *  @var array
    */
-  public $marks = array();
+  public $marks = [];
 
   /**
    *  filterUserData function filter use data in backend it checks the
@@ -58,7 +58,7 @@ class ValidateForm
       return "Marks and subject is not in the right way";
     }
     // If all conditions get satisfied an array will be returned.
-    $subWithMarks = array($this->subjects, $this->marks);
+    $subWithMarks = [$this->subjects, $this->marks];
     return $subWithMarks;
   }
 

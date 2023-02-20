@@ -54,27 +54,26 @@ $("#userDetails").validate({
   }
 });
 
-document.onreadystatechange = function () {
-  if (document.readyState !== "complete") {
-    document.querySelector(
-      "body").style.visibility = "hidden";
-    document.querySelector(
-      "#loader").style.visibility = "visible";
-  } else {
-    document.querySelector(
-      "#loader").style.display = "none";
-    document.querySelector(
-      "body").style.visibility = "visible";
-  }
-};
 
-$(document).ready(function () {
-  $("#sendResetLinkBtn").click(function () {
-    if ($(".error").text() != "") {
-      $("#loader").show();
-    }
-  });
+$("#userDetails").on("submit", function () {
+  document.getElementById('loader').style.visibility = "visible";
 });
+
+$("#logoutBtn").click(function () {
+  localStorage.clear();
+});
+
+document.onreadystatechange = function () {
+  var state = document.readyState
+  console.log(state);
+  if (state == 'interactive') {
+    document.getElementById('loader').style.visibility = "visible";
+  } else if (state == 'complete') {
+    setTimeout(function () {
+      document.getElementById('loader').style.visibility = "hidden";
+    }, 1000);
+  }
+}
 
 document.getElementById("firstname").value = getSavedValue("firstname");
 document.getElementById("lastname").value = getSavedValue("lastname");
@@ -82,9 +81,9 @@ document.getElementById("largeTextArea").value = getSavedValue("largeTextArea");
 document.getElementById("phone").value = getSavedValue("phone");
 
 function saveValue(e) {
-  var id = e.id; 
-  var val = e.value; 
-  localStorage.setItem(id, val); 
+  var id = e.id;
+  var val = e.value;
+  localStorage.setItem(id, val);
 }
 
 function getSavedValue(v) {
@@ -94,20 +93,20 @@ function getSavedValue(v) {
   return localStorage.getItem(v);
 }
 
-$("#logoutBtn").click(function () {
-  localStorage.clear();
-});
-
-let digitValidate = function(ele){
-  console.log(ele.value);
-  ele.value = ele.value.replace(/[^0-9]/g,'');
+let digitValidate = function (element) {
+  element.value = element.value.replace(/[^0-9]/g, '');
 }
 
-let tabChange = function(val){
-    let ele = document.querySelectorAll('input');
-    if(ele[val-1].value != ''){
-      ele[val].focus()
-    }else if(ele[val-1].value == ''){
-      ele[val-2].focus()
-    }   
- }
+let tabChange = function (value) {
+
+  let element = document.querySelectorAll('input');
+
+  if (element[value - 1].value != '') {
+
+    element[value].focus()
+
+  } else if (ele[val - 1].value == '') {
+    
+    element[value - 2].focus()
+  }
+}

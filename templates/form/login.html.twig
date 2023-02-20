@@ -14,7 +14,7 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
-					<form id="frm" action="/login" method="POST">
+					<form id="userDetails" action="/login" method="POST">
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text">
@@ -33,11 +33,11 @@
 						</div>
 
 						<div class="d-flex justify-content-center mt-3 login_container">
-							<button type="submit" name="button" class="btn login_btn">Login</button>
+							<button type="submit" value="Submit" name="button" class="btn login_btn">Login</button>
 						</div>
 					</form>
 				</div>
-				<div id="loader" class="center"></div>
+					<div id="loader" class="center"></div>
 				{% if msg is defined %}
 					<span id="msg">{{msg}}</span>
 				{% endif %}

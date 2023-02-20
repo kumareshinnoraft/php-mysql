@@ -12,16 +12,16 @@ class UserDetails
   #[ORM\Id]
   #[ORM\GeneratedValue]
   #[ORM\Column]
-  private ?int $id = null;
+  private ?int $id = NULL;
 
   #[ORM\Column(length: 255)]
-  private ?string $firstName = null;
+  private ?string $firstName = NULL;
 
   #[ORM\Column(length: 255)]
-  private ?string $lastName = null;
+  private ?string $lastName = NULL;
 
   #[ORM\Column(length: 255)]
-  private ?string $image = null;
+  private ?string $image = NULL;
 
   #[ORM\Column(type: Types::ARRAY )]
   private array $marks = [];
@@ -30,10 +30,10 @@ class UserDetails
   private array $subjects = [];
 
   #[ORM\Column(length: 255)]
-  private ?string $phoneNumber = null;
+  private ?string $phoneNumber = NULL;
 
   #[ORM\Column(length: 255)]
-  private ?string $userName = null;
+  private ?string $userName = NULL;
   
   /**
    *  getId is the primary key of the database.
@@ -206,5 +206,59 @@ class UserDetails
     $this->userName = $userName;
 
     return $this;
+  }
+  
+  /**
+   *  setUserDetails function is setting the values in the database.
+   *  
+   *
+   *  @param  mixed $firstName
+   *    Firstname vairable is entered by the user.
+   *  @param  mixed $lastName
+   *    Lastname is the user lastname.
+   *  @param  mixed $imagePath
+   *    Image path is the location link where user image is stored. 
+   *  @param  mixed $marks
+   *    Marks is an array of user marks.
+   *  @param  mixed $subjects
+   *    Subject is an array of user subjects.
+   *  @param  mixed $number
+   *    This variable is the phone number of the user.
+   *  @param  mixed $userName
+   *    This varible is unique in the table user_details.
+   * 
+   *  @return void
+   *    This function does not return anything instead it set the values
+   *    in the database.
+   */
+  public function setUserDetails(string $firstName, string $lastName, string $imagePath, array $marks, array $subjects, string $number, string $userName){
+
+    $this->setFirstName($firstName);
+    $this->setLastName($lastName);
+    $this->setImage($imagePath);
+    $this->setMarks($marks);
+    $this->setSubjects($subjects);
+    $this->setPhoneNumber($number);
+    $this->setUserName($userName);
+    
+  }  
+  /**
+   *  getUserDetails is the function which return the array of user
+   *  data.
+   *
+   *  @return array
+   *    array of the user is containing firstname, lastname, image path,
+   *    marks, subjects, number and username.
+   */
+  public function getUserDetails(){
+    return [
+      "firstname" => $this->getFirstName(),
+      "lastname"  => $this->getImage(),
+      "image"     => $this->getLastName(),
+      "marks"     => $this->getMarks(),
+      "subjects"  => $this->getSubjects(),
+      "number"    => $this->getPhoneNumber(),
+      "username"  => $this->getUserName()
+    ];
   }
 }

@@ -30,9 +30,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FormController extends AbstractController
 {
-  private const RESET_PASSWORD_LINK = "http://website3.com/resetyourpassword?&id=";
-  public const  IMAGE_PATH          = "http://website3.com/img/";
-  public const  PDF_PATH            = "http://website3.com/pdf/";
+  private const RESET_PASSWORD_LINK = "/resetyourpassword?&id=";
+  public const  IMAGE_PATH          = "/img/";
+  public const  PDF_PATH            = "/pdf/";
   private const VERIFY_ACCOUNT      = "Your one time password is ";
   private const RESET_PASSWORD_MSG  = "Please click the link for reseting your password ";
 
@@ -157,30 +157,30 @@ class FormController extends AbstractController
     $checkUser     = $this->em->getRepository(UserData::class)->findOneBy(['email' => $email]);
     $checkUserName = $this->em->getRepository(UserData::class)->findOneBy(['userName' => $userName]);
 
-    if ($userName == null) {
+    if ($userName == NULL) {
 
       // If username is not present, return the same page to the user
       return $this->render('form/register.html.twig');
 
-    } elseif ($checkUser != null) {
+    } elseif ($checkUser != NULL) {
 
-      // If $checkUser row is not null, it means an account the same
+      // If $checkUser row is not NULL, it means an account the same
       // email is present.
       return $this->render(
         'form/register.html.twig',
-        array(
+        [
           'msg' => "Already have a account with this mail."
-        )
+        ]
       );
 
-    } elseif ($checkUserName != null) {
+    } elseif ($checkUserName != NULL) {
 
       // If email is new but username is present returns this.
       return $this->render(
         'form/register.html.twig',
-        array(
+        [
           'msg' => "Username is already taken, try others."
-        )
+        ]
       );
     }
 
@@ -191,7 +191,7 @@ class FormController extends AbstractController
     $this->userData->setUserName($userName);
     $this->userData->setPassword(($encodedPassword));
 
-    // For the first time user email will be stored as null
+    // For the first time user email will be stored as NULL
     // After confirming mail email will be stored in the database.
     $this->userData->setEmail('');
 
@@ -219,20 +219,20 @@ class FormController extends AbstractController
       // Storing user values inside cookies, but user field is empty
       // as user if not activate yet, it will be activated when
       // correct OTP will be inserted by the user.
-      $values = array(
+      $values = [
         "user" => "",
         "email" => $email,
         "username" => $userName
-      );
+      ];
       $this->cookie->setCookie($values);
 
       // Flag 1 shows user OTP interface including message.
       return $this->render(
         'form/register.html.twig',
-        array(
+        [
           'msg' => "OTP send to your mail",
           "flag" => 1
-        )
+        ]
       );
     }
     // If no condition is satisfied returns this page.
@@ -266,20 +266,20 @@ class FormController extends AbstractController
     // The exact row matching with username entered by user,
     $userRow = $this->em->getRepository(UserData::class)->findOneBy(['userName' => $userName]);
 
-    if ($userName == null) {
+    if ($userName == NULL) {
 
-      // If username is null return the same page.
+      // If username is NULL return the same page.
       return $this->render('form/login.html.twig');
 
-    } elseif ($userRow == null) {
+    } elseif ($userRow == NULL) {
 
       // If no data with the username is present in databas returns 
       // Username and password is invalid or not registered
       return $this->render(
         'form/login.html.twig',
-        array(
+        [
           'msg' => "Password or username is not valid"
-        )
+        ]
       );
     }
 
@@ -290,28 +290,28 @@ class FormController extends AbstractController
 
       // If user entered password and database password matched stores
       // cookies as user is active.
-      $values = array(
-        "user" => "active",
-        "email" => $userRow->getEmail(),
+      $values = [
+        "user"     => "active",
+        "email"    => $userRow->getEmail(),
         "username" => $userName
-      );
+      ];
       $this->cookie->setCookie($values);
 
       // redirect user to home page.
       return $this->redirectToRoute(
         'user_home',
-        array(
+        [
           "edit" => "1"
-        )
+        ]
       );
     } else {
 
       // If password not matched return with the proper message.
       return $this->render(
         'form/login.html.twig',
-        array(
+        [
           'msg' => "Password is not valid"
-        )
+        ]
       );
     }
   }
@@ -356,28 +356,28 @@ class FormController extends AbstractController
       $this->em->flush();
 
       // save user status to active, email and username.
-      $values = array(
-        "user" => "active",
-        "email" => $selectedRow->getEmail(),
+      $values = [
+        "user"     => "active",
+        "email"    => $selectedRow->getEmail(),
         "username" => $selectedRow->getUserName()
-      );
+      ];
       $this->cookie->setCookie($values);
 
       // On a successfull OTP matches redirect user to home page.
       return $this->redirectToRoute(
         'user_home',
-        array(
+        [
           "edit" => "1"
-        )
+        ]
       );
     } else {
       // If OTP does not match return with this message.
       return $this->render(
         'form/register.html.twig',
-        array(
-          'msg' => "OTP not Matched.",
+        [
+          'msg'  => "OTP not Matched.",
           'flag' => "1"
-        )
+        ]
       );
     }
   }
@@ -407,19 +407,19 @@ class FormController extends AbstractController
     // Get the row of user with email
     $userRow = $this->em->getRepository(UserData::class)->findOneBy(['email' => $email]);
 
-    if ($email == null) {
+    if ($email == NULL) {
 
       // If not email is entered return the same page
       return $this->render('form/forget-password.html.twig');
 
-    } else if ($userRow == null) {
+    } else if ($userRow == NULL) {
 
       // If userRow is not present, returns mail not found.
       return $this->render(
         'form/forget-password.html.twig',
-        array(
+        [
           'msg' => "Mail not found"
-        )
+        ]
       );
 
     }
@@ -427,20 +427,19 @@ class FormController extends AbstractController
     // Encrypting user id before sending mail.
     $id = $this->cryptography->encode($userRow->getId());
 
-
-    if ($this->validateEmail->sendEmail($email, FormController::RESET_PASSWORD_LINK . $id, FormController::RESET_PASSWORD_MSG)) {
+    if ($this->validateEmail->sendEmail($email, "http://" . $_SERVER['SERVER_NAME'] . FormController::RESET_PASSWORD_LINK . $id, FormController::RESET_PASSWORD_MSG)) {
       // If mail is sent succesfully store the email inside cookie
-      $values = array(
+      $values = [
         "user" => "",
         "email" => $email,
         "username" => ""
-      );
+      ];
       $this->cookie->setCookie($values);
       return $this->render(
         'form/forget-password.html.twig',
-        array(
+        [
           'msg' => "Reset password link is sent to your mail"
-        )
+        ]
       );
 
     }
@@ -470,18 +469,18 @@ class FormController extends AbstractController
     // Fetching the value of the email from cookie
     $email = $this->cookie->getCookie("email", $request);
 
-    if ($newpassword == null) {
+    if ($newpassword == NULL) {
 
-      // If password is null return the same page
+      // If password is NULL return the same page
       return $this->render('form/reset-your-password.html.twig');
 
     } elseif ($newpassword != $password) {
       // If both password does not match, show error
       return $this->render(
         'form/reset-your-password.html.twig',
-        array(
+        [
           'error' => "Passwords are not matching try again"
-        )
+        ]
       );
     }
 
@@ -492,7 +491,7 @@ class FormController extends AbstractController
     $encodedPassword = $this->cryptography->encode($newpassword);
 
     // checks if the user exits
-    if ($selectedRow != null) {
+    if ($selectedRow != NULL) {
 
       // Update the encoded password in the databse
       $selectedRow->setPassword($encodedPassword);
@@ -500,20 +499,20 @@ class FormController extends AbstractController
       $this->em->flush();
 
       // Storing cookie as user is active with an email and password
-      $values = array(
+      $values = [
         "user" => "active",
         "email" => $selectedRow->getEmail(),
         "username" => $selectedRow->getUserName()
-      );
+      ];
       $this->cookie->setCookie($values);
     }
 
     // Returning message that user password is changed
     return $this->render(
       'form/reset-your-password.html.twig',
-      array(
+      [
         'msg' => "Your password changed"
-      )
+      ]
     );
   }
 
@@ -572,13 +571,13 @@ class FormController extends AbstractController
       $uploadedFile->move('../public/img', $name);
     }
 
-    $imagePath = FormController::IMAGE_PATH . $userName . ".jpg";
+    $imagePath = "http://" . $_SERVER['SERVER_NAME'] . FormController::IMAGE_PATH . $userName . ".jpg";
 
     // This function is a mixed type with returning an array and as well as string
     $msg = $this->validateForm->filterUserData($firstName, $lastName, $subTextArea);
 
-    $subjects = array();
-    $marks = array();
+    $subjects = [];
+    $marks = [];
 
     // Getting the row the userDetails table for this username
     $userRowDetails = $this->em->getRepository(UserDetails::class)->findOneBy(['userName' => $userName]);
@@ -590,17 +589,11 @@ class FormController extends AbstractController
       $subjects = $msg[0];
       $marks = $msg[1];
 
-      if ($userRowDetails != null) {
+      if ($userRowDetails != NULL) {
 
         // If use is not new and having userRowDetails, this block update
         // user details according to the data inserted by the user.
-        $userRowDetails->setFirstName($firstName);
-        $userRowDetails->setLastName($lastName);
-        $userRowDetails->setImage($imagePath);
-        $userRowDetails->setMarks($marks);
-        $userRowDetails->setSubjects($subjects);
-        $userRowDetails->setPhoneNumber($phone);
-        $userRowDetails->setUserName($userName);
+        $userRowDetails->setUserDetails($firstName, $lastName, $imagePath, $marks, $subjects, $phone, $userName);
 
         $this->em->persist($userRowDetails);
         $this->em->flush();
@@ -608,14 +601,8 @@ class FormController extends AbstractController
       } else {
 
         // If username is not present in the database we would store
-        // the uer for the first time.
-        $this->userDetails->setFirstName($firstName);
-        $this->userDetails->setLastName($lastName);
-        $this->userDetails->setImage($imagePath);
-        $this->userDetails->setMarks($marks);
-        $this->userDetails->setSubjects($subjects);
-        $this->userDetails->setPhoneNumber($phone);
-        $this->userDetails->setUserName($userName);
+        // the data for the first time.
+        $this->userDetails->setUserDetails($firstName, $lastName, $imagePath, $marks, $subjects, $phone, $userName);
 
         $this->em->persist($this->userDetails);
         $this->em->flush();
@@ -627,20 +614,20 @@ class FormController extends AbstractController
       // edit value 0 means it will turn on the edit mode.
       return $this->redirectToRoute(
         'user_home',
-        array(
+        [
           "errorMsg" => $msg,
           "edit" => "0"
-        )
+        ]
       );
     }
     // If no conditions satified it will go with the $msg and edit mode will be
     // 1, which is not editable.
     return $this->redirectToRoute(
       'user_home',
-      array(
+      [
         "errorMsg" => $msg,
         "edit" => "1"
-      )
+      ]
     );
   }
 
@@ -663,21 +650,18 @@ class FormController extends AbstractController
 
     $userRowDetails = $this->em->getRepository(UserDetails::class)->findOneBy(['userName' => $userName]);
 
-    // Getting all values from the table of the user
-    $firstname = $userRowDetails->getFirstName();
-    $lastname  = $userRowDetails->getLastName();
-    $phNum     = $userRowDetails->getPhoneNumber();
-    $subjects  = $userRowDetails->getSubjects();
-    $marks     = $userRowDetails->getMarks();
+    // Getting an array of user details
+    $userDetails = $userRowDetails->getUserDetails();
 
-    $msg = $this->pdf->downloadPdf($firstname, $lastname, $phNum, $subjects, $marks, $email, $userName);
+    // Getting all values from the table of the user and passing it for download.
+    $msg = $this->pdf->downloadPdf($userDetails["firstname"], $userDetails["lastname"], $userDetails["number"], $userDetails["subjects"], $userDetails["marks"], $email, $userName);
 
     return $this->render(
       'form/view.html.twig',
-      array(
+      [
         "msg" => "Welcome $userName",
-        "errorMsg" => $msg,
-      )
+        "errorMsg" => $msg
+      ]
     );
   }
 
@@ -708,14 +692,13 @@ class FormController extends AbstractController
       $currentTime = DateTimeImmutable::createFromFormat(DateTime::RFC3339, (new DateTime())->format(DateTime::RFC3339));
       $otpRow      = $this->em->getRepository(OTP::class)->findOneBy(['userName' => $userName]);
 
-
-      $values = array(
+      $values = [
         "user" => "",
         "email" => $email,
         "username" => $userName
-      );
+      ];
       $this->cookie->setCookie($values);
-      if ($otpRow != null) {
+      if ($otpRow != NULL) {
         // Update uername, otp and current time.
         $otpRow->setValue($randomOtp);
         $otpRow->setCreatedAt($currentTime);
@@ -727,10 +710,10 @@ class FormController extends AbstractController
 
       return $this->render(
         'form/register.html.twig',
-        array(
-          'msg' => "OTP send to your mail again",
+        [
+          'msg'  => "OTP send to your mail again",
           "flag" => 1
-        )
+        ]
       );
     }
   }
