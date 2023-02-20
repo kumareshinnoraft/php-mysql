@@ -220,8 +220,8 @@ class FormController extends AbstractController
       // as user if not activate yet, it will be activated when
       // correct OTP will be inserted by the user.
       $values = [
-        "user" => "",
-        "email" => $email,
+        "user"     => "",
+        "email"    => $email,
         "username" => $userName
       ];
       $this->cookie->setCookie($values);
@@ -230,7 +230,7 @@ class FormController extends AbstractController
       return $this->render(
         'form/register.html.twig',
         [
-          'msg' => "OTP send to your mail",
+          'msg'  => "OTP send to your mail",
           "flag" => 1
         ]
       );
@@ -430,8 +430,8 @@ class FormController extends AbstractController
     if ($this->validateEmail->sendEmail($email, "http://" . $_SERVER['SERVER_NAME'] . FormController::RESET_PASSWORD_LINK . $id, FormController::RESET_PASSWORD_MSG)) {
       // If mail is sent succesfully store the email inside cookie
       $values = [
-        "user" => "",
-        "email" => $email,
+        "user"     => "",
+        "email"    => $email,
         "username" => ""
       ];
       $this->cookie->setCookie($values);
@@ -464,7 +464,7 @@ class FormController extends AbstractController
   {
     // Getting both password and new password field
     $newpassword = $request->get('newpassword');
-    $password = $request->get('password');
+    $password    = $request->get('password');
 
     // Fetching the value of the email from cookie
     $email = $this->cookie->getCookie("email", $request);
@@ -500,8 +500,8 @@ class FormController extends AbstractController
 
       // Storing cookie as user is active with an email and password
       $values = [
-        "user" => "active",
-        "email" => $selectedRow->getEmail(),
+        "user"     => "active",
+        "email"    => $selectedRow->getEmail(),
         "username" => $selectedRow->getUserName()
       ];
       $this->cookie->setCookie($values);
@@ -577,7 +577,7 @@ class FormController extends AbstractController
     $msg = $this->validateForm->filterUserData($firstName, $lastName, $subTextArea);
 
     $subjects = [];
-    $marks = [];
+    $marks    = [];
 
     // Getting the row the userDetails table for this username
     $userRowDetails = $this->em->getRepository(UserDetails::class)->findOneBy(['userName' => $userName]);
@@ -587,7 +587,7 @@ class FormController extends AbstractController
 
       // Extracting subjects and marks.
       $subjects = $msg[0];
-      $marks = $msg[1];
+      $marks    = $msg[1];
 
       if ($userRowDetails != NULL) {
 
@@ -616,7 +616,7 @@ class FormController extends AbstractController
         'user_home',
         [
           "errorMsg" => $msg,
-          "edit" => "0"
+          "edit"     => "0"
         ]
       );
     }
@@ -626,7 +626,7 @@ class FormController extends AbstractController
       'user_home',
       [
         "errorMsg" => $msg,
-        "edit" => "1"
+        "edit"     => "1"
       ]
     );
   }
@@ -659,7 +659,7 @@ class FormController extends AbstractController
     return $this->render(
       'form/view.html.twig',
       [
-        "msg" => "Welcome $userName",
+        "msg"      => "Welcome $userName",
         "errorMsg" => $msg
       ]
     );
@@ -693,8 +693,8 @@ class FormController extends AbstractController
       $otpRow      = $this->em->getRepository(OTP::class)->findOneBy(['userName' => $userName]);
 
       $values = [
-        "user" => "",
-        "email" => $email,
+        "user"     => "",
+        "email"    => $email,
         "username" => $userName
       ];
       $this->cookie->setCookie($values);

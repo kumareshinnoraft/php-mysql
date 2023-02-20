@@ -1,4 +1,4 @@
-$("#frm").validate({
+$("#userDetails").validate({
   rules: {
     username: {
       required: true,
@@ -54,9 +54,15 @@ $("#userDetails").validate({
   }
 });
 
+document.getElementById("firstname").value = getSavedValue("firstname");
+document.getElementById("lastname").value = getSavedValue("lastname");
+document.getElementById("largeTextArea").value = getSavedValue("largeTextArea");
+document.getElementById("phone").value = getSavedValue("phone");
 
 $("#userDetails").on("submit", function () {
-  document.getElementById('loader').style.visibility = "visible";
+  if(document.getElementsByClassName("error") == null){
+    document.getElementById('loader').style.visibility = "visiable";
+  }
 });
 
 $("#logoutBtn").click(function () {
@@ -65,7 +71,6 @@ $("#logoutBtn").click(function () {
 
 document.onreadystatechange = function () {
   var state = document.readyState
-  console.log(state);
   if (state == 'interactive') {
     document.getElementById('loader').style.visibility = "visible";
   } else if (state == 'complete') {
@@ -74,11 +79,6 @@ document.onreadystatechange = function () {
     }, 1000);
   }
 }
-
-document.getElementById("firstname").value = getSavedValue("firstname");
-document.getElementById("lastname").value = getSavedValue("lastname");
-document.getElementById("largeTextArea").value = getSavedValue("largeTextArea");
-document.getElementById("phone").value = getSavedValue("phone");
 
 function saveValue(e) {
   var id = e.id;
@@ -106,7 +106,7 @@ let tabChange = function (value) {
     element[value].focus()
 
   } else if (ele[val - 1].value == '') {
-    
+
     element[value - 2].focus()
   }
 }

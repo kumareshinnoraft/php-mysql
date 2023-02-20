@@ -48,7 +48,7 @@ class DataController extends AbstractController
   private $cookie;
 
   /**
-   *  cryptography object encode and decode values before
+   *  Cryptography object encode and decode values before
    *  sending in link or storing password.
    *
    *  @var object
@@ -108,12 +108,12 @@ class DataController extends AbstractController
     // If email is not verified, these message will be shown
     $msg = "Email_not_verified";
 
-    // get the mail from the user
+    // Get the mail from the user
     if ($userRow != NULL) {
       $msg = $userRow->getEmail();
     }
 
-    $stringVersionofMarks = "";
+    $stringVersionofMarks    = "";
     $stringVersionofSubjects = "";
 
     // Extracting marks and subjects from 
