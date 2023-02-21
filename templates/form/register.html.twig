@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+{% endblock %}
+
+{% block body %}
+
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="https://static.vecteezy.com/system/resources/previews/011/571/519/original/circle-flag-of-india-free-png.png" class="brand_logo" alt="Logo">
+					</div>
+				</div>
+				{% if flag is defined %}
+					<div class="verifyOtp">
+						<div class="mb-3 title">
+							Verify OTP
+						</div>
+						<form action="/confirmaccount" id="userDetails" method="POST" class="mb-3">
+							<input class="otp" name="1" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength="1">
+							<input class="otp" name="2" type="text" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength="1">
+							<input class="otp" name="3" type="text" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength="1">
+							<input class="otp" name="4" type="text" oninput='digitValidate(this)' onkeyup='tabChange(4)' maxlength="1">
+						</form>
+						<button type="submit" value="Submit" form="userDetails" class='btn btn-primary btn-block mb-4 customBtn'>Verify</button>
+						<a href="/resendotp">Send again</a>
+					</div>
+
+				{% else %}
+					{# Break point #}
+					<div class="d-flex justify-content-center form_container">
+						<form id="userDetails" action="/register" method="POST">
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text">
+										<i class="fas fa-user"></i>
+									</span>
+								</div>
+								<input type="text" name="username" class="form-control input_user" value="" placeholder="Username">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text">
+										<i class="fas fa-envelope"></i>
+									</span>
+								</div>
+								<input type="email" name="email" class="form-control input_user" value="" placeholder="Email" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-append">
+									<span class="input-group-text">
+										<i class="fas fa-key"></i>
+									</span>
+								</div>
+								<input type="password" name="password" class="form-control input_pass" value="" placeholder="Password">
+							</div>
+							<div class="d-flex justify-content-center mt-3 login_container">
+								<button type="submit" class="btn login_btn" id="sendResetLinkBtn">Register</button>
+							</div>
+						</form>
+						<div id="loader" class="center"></div>
+					</div>
+					<div class="mt-4">
+						<div class="d-flex justify-content-center links">
+							Already have an account?
+							<a href="/login" class="ml-2">Login</a>
+						</div>
+					</div>
+					{# break poient #}
+				{% endif %}
+				{% if msg is defined %}
+					<span id="msg">{{msg}}</span>
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
