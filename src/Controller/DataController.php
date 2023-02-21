@@ -76,39 +76,39 @@ class DataController extends AbstractController
    *  This controller manages all user details and show in the view.
    *   
    *  @Route("/home", name="user_home")
-   *    This route goes to home page of the project
+   *    This route goes to home page of the project.
    * 
    *  @param object $request
    *    Request object handles parameter from query parameter.
    * 
    *  @return Response
-   *    Reponse the view which contains user stored information
+   *    Reponse the view which contains user stored information.
    *    
    */
   public function index(Request $request): Response
   {
 
-    // Get the error message
+    // Get the error message.
     $error = $request->get('errorMsg');
 
-    // Checks user status, if it is active then forward user to login screen
+    // Checks user status, if it is active then forward user to login screen.
     if (!$this->cookie->isActive($request)) {
       return $this->redirectToRoute('login_form');
     }
 
-    // Getting username from the cookie
+    // Getting username from the cookie.
     $userName = $this->cookie->getCookie("username", $request);
 
-    // We need the user table because we have to send data to frontend as well
+    // We need the user table because we have to send data to frontend as well.
     $userRow = $this->em->getRepository(UserData::class)->findOneBy(['userName' => $userName]);
 
     // User details table
     $userRowDetails = $this->em->getRepository(UserDetails::class)->findOneBy(['userName' => $userName]);
 
-    // If email is not verified, these message will be shown
+    // If email is not verified, these message will be shown.
     $msg = "Email_not_verified";
 
-    // Get the mail from the user
+    // Get the mail from the user.
     if ($userRow != NULL) {
       $msg = $userRow->getEmail();
     }
@@ -116,7 +116,7 @@ class DataController extends AbstractController
     $stringVersionofMarks    = "";
     $stringVersionofSubjects = "";
 
-    // Extracting marks and subjects from 
+    // Extracting marks and subjects from.
     if ($userRowDetails != NULL) {
       $stringVersionofMarks    = implode(',', $userRowDetails->getMarks());
       $stringVersionofSubjects = implode(',', $userRowDetails->getSubjects());
@@ -163,7 +163,7 @@ class DataController extends AbstractController
    *    Request object handles parameter from query parameter.
    * 
    *  @return Response
-   *    Confirmation message of resetting OTP to value 0;
+   *    Confirmation message of resetting OTP to value 0.
    *    
    */
   public function removeOtp(Request $request): Response

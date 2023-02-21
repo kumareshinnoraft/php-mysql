@@ -75,7 +75,7 @@ class Cookie
    *  getCookie function is used to extract the value and returns the value.
    *
    *  @param  string $name
-   *    $name parameter is the key of the value user is requesting for.
+   *    Name parameter is the key of the value user is requesting for.
    *  @param  object $request
    *    An request object understands in which page value is required.
    * 

@@ -20,15 +20,15 @@ class ValidateEmail
    *  sendEmail function send a mail acording to the parameter provided.
    *
    *  @param  mixed $email
-   *    $email is where we have to send the mail.
+   *    This is where we have to send the mail.
    *  @param  mixed $link
-   *    $link contains the link which will be send in the body, it can be a
+   *    This contains the link which will be send in the body, it can be a
    *    OTP as well.
    *  @param  mixed $msg
-   *    $msg will contain the message which will be included in the body.
+   *    This will contain the message which will be included in the body.
    * 
    *  @return boolean
-   *    If mail is send succesfully returns TRUE insead FALSE.
+   *    If mail is send succesfully returns TRUE instead FALSE.
    * 
    */
   public function sendEmail(string $email, string $link, string $msg)
@@ -65,7 +65,7 @@ class ValidateEmail
         return TRUE;
       }
     } catch (Exception $e) {
-      echo "Message could not be sent. Mailer Error: {$e}";
+      echo "Message could not be sent";
     }
     return FALSE;
   }

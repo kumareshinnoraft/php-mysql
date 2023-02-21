@@ -21,13 +21,13 @@ namespace App\Entity;
 class ValidateForm
 {
   /**
-   *  subjects array will store all extracted subjects.
+   *  Subjects array will store all extracted subjects.
    *
    *  @var array
    */
   public $subjects = [];
   /**
-   *  marks array will store all extracted marks.
+   *  Marks array will store all extracted marks.
    *
    *  @var array
    */
@@ -38,9 +38,9 @@ class ValidateForm
    *  validaty of the text
    *
    *  @param  string $firstName
-   *    Firstname text of the user.
+   *    First name text of the user.
    *  @param  string $lastName
-   *    Lastname text entered by the user.
+   *    Last name text entered by the user.
    *  @param  string $marksAndsubject
    *    This text contains both marks and subjects.
    * 
@@ -69,8 +69,8 @@ class ValidateForm
    *    This string contains subject and marks both.
    * 
    *  @return boolean
-   *   If marks and subjects are entered by the user in a proper way,
-   *   it will reeturn TRUE instrad FALSE.
+   *    If marks and subjects are entered by the user in a proper way,
+   *    it will reeturn TRUE instrad FALSE.
    */
   public function extractMarksSubjects(string $subTextArea)
   {

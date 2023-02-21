@@ -484,21 +484,21 @@ class FormController extends AbstractController
       );
     }
 
-    // Get the row of the user from user_data tabel 
+    // Get the row of the user from user_data tabel. 
     $selectedRow = $this->em->getRepository(UserData::class)->findOneBy(['email' => $email]);
 
     // Encoding the new password before storing it in the database.
     $encodedPassword = $this->cryptography->encode($newpassword);
 
-    // Checks if the user exits
+    // Checks if the user exits.
     if ($selectedRow != NULL) {
 
-      // Update the encoded password in the databse
+      // Update the encoded password in the databse.
       $selectedRow->setPassword($encodedPassword);
       $this->em->persist($selectedRow);
       $this->em->flush();
 
-      // Storing cookie as user is active with an email and password
+      // Storing cookie as user is active with an email and password.
       $values = [
         "user"     => "active",
         "email"    => $selectedRow->getEmail(),
@@ -507,7 +507,7 @@ class FormController extends AbstractController
       $this->cookie->setCookie($values);
     }
 
-    // Returning message that user password is changed
+    // Returning message that user password is changed.
     return $this->render(
       'form/reset-your-password.html.twig',
       [
@@ -520,13 +520,13 @@ class FormController extends AbstractController
    *  This controller deletes all cookies and destroy sessions.
    *   
    *  @Route("/logout", name="logout")
-   *    No page will be shown instead user will be forwarded to login page 
+   *    No page will be shown instead user will be forwarded to login page .
    * 
    *  @param object $request
    *    Request object handles parameter from query parameter.
    * 
    *  @return Response
-   *    It redirect user to login page
+   *    It redirect user to login page.
    */
   public function logout(Request $request): Response
   {
@@ -538,12 +538,12 @@ class FormController extends AbstractController
     if (isset($_COOKIE["user-info"])) {
       $this->cookie->removeCookie($request);
     }
-    // Return user to login page
+    // Return user to login page.
     return $this->redirectToRoute('login_form');
   }
 
   /**
-   *  Save or update the user details in the user_details table
+   *  Save or update the user details in the user_details table.
    *   
    *  @Route("/save", name="save_form_data")
    *    Saves user inserted details to user_details table.
@@ -565,7 +565,7 @@ class FormController extends AbstractController
     $subTextArea = $request->get('subTextArea');
     $phone       = $request->get('phone');
 
-    // Saving image with username and saving it the img directory
+    // Saving image with username and saving it the img directory.
     foreach ($request->files as $uploadedFile) {
       $name = "$userName.jpg";
       $uploadedFile->move('../public/img', $name);
@@ -573,13 +573,13 @@ class FormController extends AbstractController
 
     $imagePath = "http://" . $_SERVER['SERVER_NAME'] . FormController::IMAGE_PATH . $userName . ".jpg";
 
-    // This function is a mixed type with returning an array and as well as string
+    // This function is a mixed type with returning an array and as well as string.
     $msg = $this->validateForm->filterUserData($firstName, $lastName, $subTextArea);
 
     $subjects = [];
     $marks    = [];
 
-    // Getting the row the userDetails table for this username
+    // Getting the row the userDetails table for this username.
     $userRowDetails = $this->em->getRepository(UserDetails::class)->findOneBy(['userName' => $userName]);
 
     // If the $msg is an array, it means all validation is successful.
@@ -632,7 +632,7 @@ class FormController extends AbstractController
   }
 
   /**
-   *  This controller is called for downloading the pdf
+   *  This controller is called for downloading the pdf.
    *   
    *  @Route("/download", name="download_pdf")
    *    This page downloads the PDF for the user.
@@ -650,7 +650,7 @@ class FormController extends AbstractController
 
     $userRowDetails = $this->em->getRepository(UserDetails::class)->findOneBy(['userName' => $userName]);
 
-    // Getting an array of user details
+    // Getting an array of user details.
     $userDetails = $userRowDetails->getUserDetails();
 
     // Getting all values from the table of the user and passing it for download.
@@ -666,7 +666,7 @@ class FormController extends AbstractController
   }
 
   /**
-   *  This controller is used to resend the otp
+   *  This controller is used to resend the otp.
    *   
    *  @Route("/resendotp", name="resend_otp")
    *    Resend OTP route resend the otp to the mail.
@@ -675,11 +675,11 @@ class FormController extends AbstractController
    *    Request object handles parameter from query parameter and cookie.
    * 
    *  @return mixed
-   *    It generate a pdf
+   *    It generate a pdf.
    */
   public function resedOtp(Request $request)
   {
-    // Generating four digit random number
+    // Generating four digit random number.
     $randomOtp = rand(1000, 9999);
 
     // Getting the value from cookie.
@@ -703,7 +703,7 @@ class FormController extends AbstractController
         $otpRow->setValue($randomOtp);
         $otpRow->setCreatedAt($currentTime);
 
-        // Update the OTP in the table
+        // Update the OTP in the table.
         $this->em->persist($otpRow);
         $this->em->flush();
       }

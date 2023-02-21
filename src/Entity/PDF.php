@@ -31,15 +31,14 @@ class PDF
   {
     $this->pdf = new FPDF();
   }
-
   
   /**
    *  downloadPdf function creates a PDF file with these parameters.
    *
    *  @param  string $firstName
-   *    firstname of the user.
+   *    First name of the user.
    *  @param  string $lastName
-   *    lastname of the user
+   *    Last name of the user
    *  @param  string $phNum
    *    Phone number of the user.
    *  @param  array $subjects
@@ -49,7 +48,7 @@ class PDF
    *  @param  string $email
    *    Email inserted by the user.
    *  @param  string $userName
-   *    Username which will help to find the image for this user.
+   *    User name which will help to find the image for this user.
    * 
    *  @return string
    *    This method simply returns a confirmation string.

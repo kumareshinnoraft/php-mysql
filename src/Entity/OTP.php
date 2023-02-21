@@ -23,7 +23,7 @@ class OTP
     private ?int $value = NULL;
     
     /**
-     *  getId is the auto generated primary key in database
+     *  getId is the auto generated primary key in database.
      *
      *  @return int
      */

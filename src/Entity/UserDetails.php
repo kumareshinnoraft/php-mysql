@@ -213,9 +213,9 @@ class UserDetails
    *  
    *
    *  @param  mixed $firstName
-   *    Firstname vairable is entered by the user.
+   *    First name vairable is entered by the user.
    *  @param  mixed $lastName
-   *    Lastname is the user lastname.
+   *    Last name is the user lastname.
    *  @param  mixed $imagePath
    *    Image path is the location link where user image is stored. 
    *  @param  mixed $marks

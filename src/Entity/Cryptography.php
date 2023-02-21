@@ -19,7 +19,7 @@ class Cryptography
      *  encode function uses base64 encoding function to encrypt the string
      *
      *  @param  mixed $msg
-     *    $msg is the string which will be encrypted.
+     *    This is the string which will be encrypted.
      * 
      *  @return string
      *    Method returns a encoded message.
