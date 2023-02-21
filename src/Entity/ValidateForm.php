@@ -7,9 +7,9 @@ namespace App\Entity;
  *  format is correct.
  * 
  *  @method filterUserData()
- *    this method filters user inserted data.
+ *    This method filters user inserted data.
  *  @method extractMarksSubjects()
- *    this method extract subjects and marks.
+ *    This method extract subjects and marks.
  *    
  *  @property array $subjects
  *    This array stores the subjects.
@@ -69,7 +69,7 @@ class ValidateForm
    *    This string contains subject and marks both.
    * 
    *  @return boolean
-   *   if marks and subjects are entered by the user in a proper way,
+   *   If marks and subjects are entered by the user in a proper way,
    *   it will reeturn TRUE instrad FALSE.
    */
   public function extractMarksSubjects(string $subTextArea)

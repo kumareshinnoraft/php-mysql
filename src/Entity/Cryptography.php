@@ -22,7 +22,7 @@ class Cryptography
      *    $msg is the string which will be encrypted.
      * 
      *  @return string
-     *    method returns a encoded message.
+     *    Method returns a encoded message.
      */
     public function encode(string $msg)
     {
@@ -36,7 +36,7 @@ class Cryptography
      *    $msg is the string which will be decrypted.
      * 
      *  @return string
-     *    method returns a decoded message.
+     *    Method returns a decoded message.
      */
     public function decode(string $msg)
     {

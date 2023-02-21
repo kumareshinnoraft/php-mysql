@@ -77,10 +77,10 @@ class Cookie
    *  @param  string $name
    *    $name parameter is the key of the value user is requesting for.
    *  @param  object $request
-   *    an request object understands in which page value is required.
+   *    An request object understands in which page value is required.
    * 
    *  @return mixed
-   *    if value of the key is found retun string instead boolean.
+   *    If value of the key is found retun string instead boolean.
    */
   public function getCookie(string $name, object $request)
   {
@@ -103,11 +103,11 @@ class Cookie
    *  isActive function returns if user active or not
    *
    *  @param  object $request
-   *    request object is taken from the user to indentify which
+   *    Request object is taken from the user to indentify which
    *    page is requesting isActive method.
    * 
    *  @return boolean
-   *    if user status is active function returns TRUE instead FALSE.
+   *    If user status is active function returns TRUE instead FALSE.
    */
   public function isActive(object $request)
   {
@@ -129,10 +129,10 @@ class Cookie
    *  removeCookie function is used to remove user data from cookie.
    *
    *  @param  object $request
-   *    request is needed to get the cookies of the pages.
+   *    Request is needed to get the cookies of the pages.
    * 
    *  @return void
-   *    this function does not retuns anything as it just remove the user.
+   *    This function does not retuns anything as it just remove the user.
    */
   public function removeCookie(object $request)
   {

@@ -61,7 +61,7 @@ class FormController extends AbstractController
   private $userDetails;
 
   /**
-   *  cryptography object encode and decode values before
+   *  Cryptography object encode and decode values before
    *  sending in link or storing password.
    *
    *  @var object
@@ -335,11 +335,11 @@ class FormController extends AbstractController
     // Concat the OTP entered by the user from different input.
     $otp = $request->get('1') . $request->get('2') . $request->get('3') . $request->get('4');
 
-    // fetch the username from the cookie
+    // Fetch the username from the cookie
     $userName = $this->cookie->getCookie("username", $request);
     $email    = $this->cookie->getCookie("email", $request);
 
-    // fetch the row of the otp table by the username
+    // Fetch the row of the otp table by the username
     $otpRow = $this->em->getRepository(OTP::class)->findOneBy(['userName' => $userName]);
 
     // Checks if both OTP matches
@@ -355,7 +355,7 @@ class FormController extends AbstractController
       $this->em->persist($selectedRow);
       $this->em->flush();
 
-      // save user status to active, email and username.
+      // Save user status to active, email and username.
       $values = [
         "user"     => "active",
         "email"    => $selectedRow->getEmail(),
@@ -490,7 +490,7 @@ class FormController extends AbstractController
     // Encoding the new password before storing it in the database.
     $encodedPassword = $this->cryptography->encode($newpassword);
 
-    // checks if the user exits
+    // Checks if the user exits
     if ($selectedRow != NULL) {
 
       // Update the encoded password in the databse

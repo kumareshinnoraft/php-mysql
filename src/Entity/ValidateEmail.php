@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\PHPMailer;
  *  of this class.
  * 
  *  @method sendMail()
- *    this method is used for sending the mail.
+ *    This method is used for sending the mail.
  *  
  *  @author Kumaresh Baksi <kumaresh.baksi@innoraft.com>
  */
@@ -28,7 +28,7 @@ class ValidateEmail
    *    $msg will contain the message which will be included in the body.
    * 
    *  @return boolean
-   *    if mail is send succesfully returns TRUE insead FALSE.
+   *    If mail is send succesfully returns TRUE insead FALSE.
    * 
    */
   public function sendEmail(string $email, string $link, string $msg)

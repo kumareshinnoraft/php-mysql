@@ -41,18 +41,18 @@ class PDF
    *  @param  string $lastName
    *    lastname of the user
    *  @param  string $phNum
-   *    phone number of the user.
+   *    Phone number of the user.
    *  @param  array $subjects
-   *    all subjects insered by the user.
+   *    All subjects insered by the user.
    *  @param  array $marks
-   *    marks number insered by the user.
+   *    Marks number insered by the user.
    *  @param  string $email
-   *    email inserted by the user.
+   *    Email inserted by the user.
    *  @param  string $userName
-   *    username which will help to find the image for this user.
+   *    Username which will help to find the image for this user.
    * 
    *  @return string
-   *    this method simply returns a confirmation string.
+   *    This method simply returns a confirmation string.
    */
   public function downloadPdf(string $firstName, string $lastName, string $phNum, array $subjects, array $marks, string $email, string $userName)
   {

@@ -247,7 +247,7 @@ class UserDetails
    *  data.
    *
    *  @return array
-   *    array of the user is containing firstname, lastname, image path,
+   *    Array of the user is containing firstname, lastname, image path,
    *    marks, subjects, number and username.
    */
   public function getUserDetails(){
