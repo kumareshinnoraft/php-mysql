@@ -253,8 +253,8 @@ class UserDetails
   public function getUserDetails(){
     return [
       "firstname" => $this->getFirstName(),
-      "lastname"  => $this->getImage(),
-      "image"     => $this->getLastName(),
+      "lastname"  => $this->getLastName(),
+      "image"     => $this->getImage(),
       "marks"     => $this->getMarks(),
       "subjects"  => $this->getSubjects(),
       "number"    => $this->getPhoneNumber(),

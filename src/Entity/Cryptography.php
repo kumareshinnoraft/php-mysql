@@ -26,8 +26,7 @@ class Cryptography
      */
     public function encode(string $msg)
     {
-        $encodedPassword = urlencode(base64_encode($msg));
-        return $encodedPassword;
+        return urlencode(base64_encode($msg));
     }
 
     /**
@@ -41,7 +40,6 @@ class Cryptography
      */
     public function decode(string $msg)
     {
-      $decodedPassword = base64_decode(urldecode($msg));
-      return $decodedPassword;
+      return base64_decode(urldecode($msg));
     }
 }

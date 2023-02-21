@@ -121,7 +121,6 @@ class DataController extends AbstractController
       $stringVersionofMarks    = implode(',', $userRowDetails->getMarks());
       $stringVersionofSubjects = implode(',', $userRowDetails->getSubjects());
     }
-
     $edit = $request->get('edit');
 
     // If edit value is 1, view mode will be shown.

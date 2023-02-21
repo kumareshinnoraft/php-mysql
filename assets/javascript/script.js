@@ -54,12 +54,9 @@ $("#userDetails").validate({
   }
 });
 
-document.getElementById("firstname").value = getSavedValue("firstname");
-document.getElementById("lastname").value = getSavedValue("lastname");
-document.getElementById("largeTextArea").value = getSavedValue("largeTextArea");
-document.getElementById("phone").value = getSavedValue("phone");
 
 $("#userDetails").on("submit", function () {
+  
   if(document.getElementsByClassName("error") == null){
     document.getElementById('loader').style.visibility = "visiable";
   }
@@ -78,19 +75,6 @@ document.onreadystatechange = function () {
       document.getElementById('loader').style.visibility = "hidden";
     }, 1000);
   }
-}
-
-function saveValue(e) {
-  var id = e.id;
-  var val = e.value;
-  localStorage.setItem(id, val);
-}
-
-function getSavedValue(v) {
-  if (!localStorage.getItem(v)) {
-    return "";
-  }
-  return localStorage.getItem(v);
 }
 
 let digitValidate = function (element) {

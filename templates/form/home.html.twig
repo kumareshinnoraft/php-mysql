@@ -30,6 +30,7 @@
 			<div class="container">
 				<div class="form">
 					<form id="userDetails" action="home?edit=1" method="GET" enctype="multipart/form-data">
+						<label for="" class="error"></label>
 						<label>Full Name</label>
 						<div class="form-group mr-auto ml-auto   row">
 							<input class="form-control col-sm-6 " value={% if firstname is defined %} {{firstname}} {% endif %} readonly/>
@@ -53,15 +54,12 @@
 							<input class="form-control col-sm-6 phone" value={% if phone is defined %} {{phone}} {% endif %} readonly/>
 							<input class="form-control col-sm-6 email" value={% if email is defined %} {{email}} {% endif %} type="email" placeholder="Email" name="email" id="email" readonly/>
 						</div>
-						{# <div id="loader" class="center"></div> #}
-						{% if errorMsg is defined %}
-							<span id="msg">{{errorMsg}}</span>
-						{% endif %}
+
 						<div class="buttons">
 							<button class="btn btn-default bg-primary mt-2" onclick="window.location.href='/home?edit=0';">Edit</button>
-							<button class="btn btn-default bg-primary mt-2" onclick="window.location.href='/download';">Download</button>
 						</div>
 					</form>
+					<button class="btn btn-default bg-primary mt-2" onclick="window.location.href='/download';">Download</button>
 				</div>
 			</div>
 		</div>
@@ -93,7 +91,10 @@
 							<input class="form-control col-sm-6 pnNum" onkeyup='saveValue(this);' maxlength="10" type="number" placeholder="Phone number" name="phone" id="phone"/>
 							<input class="form-control col-sm-6 email" value={% if email is defined %} {{email}} {% endif %} type="email" placeholder="Email" name="email" id="email" readonly/>
 						</div>
-						{# For loader #}
+
+						{% if errorMsg is defined %}
+							<span id="msg">{{errorMsg}}</span>
+						{% endif %}
 
 						<div id="loader" class="center"></div>
 						<div class="buttons">
@@ -104,7 +105,7 @@
 				</div>
 			</div>
 		</div>
-		{# break point #}
+
 	{% endif %}
 
 	<footer class="page-footer font-small fixed-bottom blue">
@@ -113,5 +114,31 @@
 				www.india.gov.in</a>
 		</div>
 	</footer>
+
+  <script>
+  
+  document.getElementById("firstname").value = getSavedValue("firstname");
+  document.getElementById("lastname").value = getSavedValue("lastname");
+  document.getElementById("largeTextArea").value = getSavedValue("largeTextArea");
+  document.getElementById("phone").value = getSavedValue("phone");
+
+  function saveValue(e) {
+    var id = e.id;
+    var val = e.value;
+    localStorage.setItem(id, val);
+  }
+
+  function getSavedValue(v) {
+    if (!localStorage.getItem(v)) {
+      return "";  
+    }
+    return localStorage.getItem(v);
+  }
+
+  $(window).on("load", function () {
+        localStorage.clear();
+  });
+
+  </script>
 
 {% endblock %}

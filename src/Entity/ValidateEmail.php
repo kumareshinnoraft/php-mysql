@@ -44,14 +44,14 @@ class ValidateEmail
       $mail->SMTPAuth = TRUE;
 
       // Setting username and password from GMAIL SMTP server
-      $mail->Username = 'baksikumaresh@gmail.com';
-      $mail->Password = 'kedgwpgsckhzqvmo';
+      $mail->Username = 'ajanatech0@gmail.com';
+      $mail->Password = 'kixloqvyfjhijtoi';
 
       // This tls encrypt the whole SMTP process.
       $mail->SMTPSecure = 'tls';
       $mail->Port = 587;
 
-      $mail->setFrom('baksikumaresh@gmail.com', 'Innoraft');
+      $mail->setFrom('ajanatech0@gmail.com', 'Innoraft');
       $mail->addAddress("$email", '');
 
       // isHTML function in PHPMailer allows you

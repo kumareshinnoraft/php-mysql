@@ -31,8 +31,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormController extends AbstractController
 {
   private const RESET_PASSWORD_LINK = "/resetyourpassword?&id=";
-  public const  IMAGE_PATH          = "/img/";
-  public const  PDF_PATH            = "/pdf/";
+  public const IMAGE_PATH           = "/img/";
+  public const PDF_PATH             = "/pdf/";
   private const VERIFY_ACCOUNT      = "Your one time password is ";
   private const RESET_PASSWORD_MSG  = "Please click the link for reseting your password ";
 
@@ -337,13 +337,13 @@ class FormController extends AbstractController
 
     // fetch the username from the cookie
     $userName = $this->cookie->getCookie("username", $request);
-    $email = $this->cookie->getCookie("email", $request);
+    $email    = $this->cookie->getCookie("email", $request);
 
     // fetch the row of the otp table by the username
     $otpRow = $this->em->getRepository(OTP::class)->findOneBy(['userName' => $userName]);
 
     // Checks if both OTP matches
-    if ($otpRow->getValue() == $otp) {
+    if ($otpRow != NULL && $otpRow->getValue() == $otp) {
 
       // If both OTP matches, email can be saved to UserData table.
       $selectedRow = $this->em->getRepository(UserData::class)->findOneBy(['userName' => $userName]);
@@ -412,7 +412,7 @@ class FormController extends AbstractController
       // If not email is entered return the same page
       return $this->render('form/forget-password.html.twig');
 
-    } else if ($userRow == NULL) {
+    } elseif ($userRow == NULL) {
 
       // If userRow is not present, returns mail not found.
       return $this->render(
@@ -616,7 +616,7 @@ class FormController extends AbstractController
         'user_home',
         [
           "errorMsg" => $msg,
-          "edit"     => "0"
+          "edit" => "0"
         ]
       );
     }
@@ -626,7 +626,7 @@ class FormController extends AbstractController
       'user_home',
       [
         "errorMsg" => $msg,
-        "edit"     => "1"
+        "edit" => "1"
       ]
     );
   }
@@ -646,7 +646,7 @@ class FormController extends AbstractController
   public function download(Request $request)
   {
     $userName = $this->cookie->getCookie("username", $request);
-    $email    = $this->cookie->getCookie("email", $request);
+    $email = $this->cookie->getCookie("email", $request);
 
     $userRowDetails = $this->em->getRepository(UserDetails::class)->findOneBy(['userName' => $userName]);
 
@@ -659,7 +659,7 @@ class FormController extends AbstractController
     return $this->render(
       'form/view.html.twig',
       [
-        "msg"      => "Welcome $userName",
+        "msg" => "Welcome $userName",
         "errorMsg" => $msg
       ]
     );
@@ -683,14 +683,14 @@ class FormController extends AbstractController
     $randomOtp = rand(1000, 9999);
 
     // Getting the value from cookie.
-    $email     = $this->cookie->getCookie("email", $request);
-    $userName  = $this->cookie->getCookie("username", $request);
+    $email    = $this->cookie->getCookie("email", $request);
+    $userName = $this->cookie->getCookie("username", $request);
 
     if ($this->validateEmail->sendEmail($email, $randomOtp, FormController::VERIFY_ACCOUNT)) {
 
       // If mail is send succesfully creates the time with date.
       $currentTime = DateTimeImmutable::createFromFormat(DateTime::RFC3339, (new DateTime())->format(DateTime::RFC3339));
-      $otpRow      = $this->em->getRepository(OTP::class)->findOneBy(['userName' => $userName]);
+      $otpRow = $this->em->getRepository(OTP::class)->findOneBy(['userName' => $userName]);
 
       $values = [
         "user"     => "",
